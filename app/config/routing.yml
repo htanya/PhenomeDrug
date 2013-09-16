@@ -1,0 +1,5 @@
+phenome_drug:
+    resource: "@PhenomeDrugBundle/Resources/config/routing.php"
+    prefix:   /phenomedrug
+
+
