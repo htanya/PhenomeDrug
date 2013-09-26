@@ -1,0 +1,51 @@
+
+
+{% block Phenome_body %}
+
+
+<body>
+<div id="top"> 
+	{% block title %}
+		<h3>Drug page for {{results.drug_name}}</h3>
+	{% endblock %}
+</div>
+
+
+<div id="left">
+{% block drug_uri%}
+	<h3>Drug uri:</h3><p> <h4> {{results.drug_uri}}</h4><p>
+{% endblock %}
+</div>
+
+
+<div id="middle">
+{% block target_uri %}
+	{% for drug in results %}
+	{% for targets in drug %}
+        {% set targetID = (targets.target_uri|getTargetID) %}
+		<h3>Target uri:</h3>  <p> <h4> <a href="{{ path('phenome_target_page', { 'target_id': targetID }) }}"> {{targets.target_uri}} </a></h4><p> 
+	{% endfor %}
+	{% endfor %}
+{% endblock %}
+</div>
+
+
+
+<div id="right">
+{% block target_name %}
+	{% for drug in results %}
+	{% for targets in drug %}
+ 	{% set targetID = (targets.target_name|getTargetID) %}
+		<h3>Target name:</h3>  <p> <h4> <a href="{{ path('phenome_target_page', { 'target_id': targetID }) }}">{{targets.target_name}}</a></h4><p> 
+	{% endfor %}
+	{% endfor %}
+{% endblock %}
+</div>
+
+{% endblock %} {# closes the body #}
+
+
+{% block stylesheets %}
+            <link href="{{ asset('bundles/datatables/css/layout.css') }}" rel="stylesheet" />
+{% endblock %}
+

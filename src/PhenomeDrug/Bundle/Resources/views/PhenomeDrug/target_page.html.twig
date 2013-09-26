@@ -1,0 +1,53 @@
+{# src/PhenomeDrug/Bundle/Resources/views/Try/target_page.html.twig #}
+
+
+
+{% block Phenome_body %}
+
+<body>
+
+<div id="top"> 
+{% block title %}
+<h3>{{results.target_name}}</h3>
+{% endblock %}
+</div>
+
+<div id="middle">
+{% block drug_uri %}
+	{% for target in results %}
+	{% for drugs in target %}
+		<h3>Drug uri:</h3>  <p> 
+		<h4> <a href="{{ path('phenome_drug_page', { 'drug_name': drugs.drug_name }) }}">{{drugs.drug_uri}}</a></h4><p> 
+	{% endfor %}
+	{% endfor %}
+{% endblock %}
+</div>
+
+
+<div id="left">
+{% block target_uri%}
+	<h3>Target uri:</h3><p> <h4> {{results.target_uri}}</h4><p>
+{% endblock %}
+</div>
+
+
+<div id="right">
+{% block drug_name %}
+	{% for target in results %}
+	{% for drugs in target %}
+		<h3>Drug name:</h3>  <p> <h4><a href="{{ path('phenome_drug_page', { 'drug_name': drugs.drug_name }) }}">{{drugs.drug_name}}</a></h4><p> 
+	{% endfor %}
+	{% endfor %}
+{% endblock %}
+</div>
+
+<p>
+
+
+
+</body>
+{% endblock %} {# closes body #}
+
+{% block stylesheets %}
+            <link href="{{ asset('bundles/datatables/css/layout.css') }}" rel="stylesheet" />
+{% endblock %}

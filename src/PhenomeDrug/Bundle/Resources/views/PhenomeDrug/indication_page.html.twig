@@ -1,0 +1,49 @@
+{# indication info #}
+
+{# gets the indication to dislpay on page as uri3 #}
+{% set uri = app.request.uri %}
+{% set uri2 = uri | removeDrugPath %}
+{% set uri3 = uri2| url_decode %}
+
+
+
+
+
+{% block Phenome_body %}
+
+<body>
+
+<div id="top"> 
+{% block title %}
+	<h4><center>Drugs and targets indicated {{uri3}} </center></h4>
+{% endblock %}
+</div>
+
+
+<div id="left"> 
+{% block drug_name %}
+<h3>Drug(s):</h3><p>
+	{% for drug in results.drugs %}
+		<h4><li> <a href="{{ path('phenome_drug_page', { 'drug_name': drug.drug_name }) }}">  {{drug.drug_name}} </a></h4>
+	{% endfor %}
+{% endblock %}
+</div>
+
+<div id="right"> 
+{% block target_name %}
+<h3>Target(s):</h3><p>
+	{% for target in results.targets %}
+        {% set targetID = (target.target_name|getTargetID) %}
+
+		<h4><li> <a href="{{ path('phenome_target_page', { 'target_id': targetID }) }}"> {{target.target_name}} </a></h4><br>
+
+	{% endfor %}
+{% endblock %}
+</div>
+
+{% endblock %} {# closes body #}
+
+{% block stylesheets %}
+            <link href="{{ asset('bundles/datatables/css/layout.css') }}" rel="stylesheet" />
+{% endblock %}
+

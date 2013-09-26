@@ -1,4 +1,20 @@
 all drugs <br>
 - table (columns ; drug name, associated targets, drug indication (s)) <p>
-<a href="http://localhost/Symfony2/web/app_dev.php/phenomedrug/">Return to homepage</a>
+<a href="http://localhost/Symfony2/web/app_dev.php/phenomedrug/">Return to homepage</a> <p>
+
+{{results}} <p><p>
+
+<head>
+{% block javascripts %}
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+ <script type="text/javascript" charset="utf-8" src="{{ asset('src/PhenomeDrug/Bundle/ServerSide/DataTables-1.9.4/media/js/jquery.dataTables.js') }}"></script>
+
+ <script type="text/javascript">
+{% endblock %}
+
+{% block stylesheets %}
+            <link href="{{ asset('src/PhenomeDrug/Bundle/ServerSide/DataTables-1.9.4/media/css/demo_table.css') }}" rel="stylesheet" />
+{% endblock %}
+
+</head>
 

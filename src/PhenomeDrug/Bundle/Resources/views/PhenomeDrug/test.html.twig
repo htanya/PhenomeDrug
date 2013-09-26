@@ -1,1 +1,156 @@
-Test things here
+{# src/Phenome/TryBundle/Resources/views/Try/index.html.twig #}
+
+
+
+{# This page renders the contents of the arrays which are rendered to the view in the Controller #}
+
+<!DOCTYPE html>
+  <html>
+    <head>
+      <title>PhenomeDrug</title>
+    </head>
+ <body>
+
+
+   <h1>Welcome !</h1> 
+    <p>
+    Construction is currently in progress! 
+    </p> 
+
+<div id="navigation">
+ <div align="right">
+ 
+</div>  <p>
+
+<div class="pure-menu pure-menu-open">
+    <a class="pure-menu-heading"> Website Navigation
+
+    <ul>
+        <li><a href="#">Target</a></li>
+        <li><a href="#">Drugs</a></li>
+        <li><a href="#">Effects</a></li>
+        <li><a href="#">Phenotypes</a></li>
+       
+    </ul>
+</div>
+
+
+ <head>
+<tab
+{% block javascripts %}
+<script src="http://code.jquery.com/jquery-1.10.1.min.js"></script>
+ <script type="text/javascript" charset="utf-8" src="{{ asset('src/PhenomeDrug/Bundle/ServerSide/DataTables-1.9.4/media/js/jquery.dataTables.js') }}"></script>
+
+ <script type="text/javascript">
+
+
+
+$(document).ready( function () {
+var asInitVals = new Array();
+    var oTable = $('#table_id').dataTable({
+    "bProcessing": true,
+    "bServerSide": true,
+    "sAjaxSource": "{{ asset ('src/PhenomeDrug/Bundle/ServerSide/server_script.php') }}",
+
+"fnRowCallback": function( nRow, aaData ) {
+      if ( aaData[0] != null )
+      {
+ $('td:eq(0)', nRow).html('<a href="http://localhost/Symfony2/web/app_dev.php/phenomedrug/drug/' + aaData[0] + '">'+ aaData[0] + '</a>');
+
+ {
+
+
+       }
+
+	return nRow;
+    }
+
+
+  }
+
+   	
+    });
+
+
+    $("tfoot input").each( function (i) {
+        asInitVals[i] = this.value;
+    } );
+
+        
+   /*  
+    $("tfoot input").focus( function () {
+        if ( this.className == "search_init" )
+        {
+            this.className = "";
+            this.value = "";
+        }
+    } );
+
+    $("tfoot input").blur( function (i) {
+        if ( this.value == "" )
+        {
+            this.className = "search_init";
+            this.value = asInitVals[$("tfoot input").index(this)];
+        }
+    } );
+*/
+    $("tfoot input").keyup( function () {
+        oTable.fnFilter( this.value, $("tfoot input").index(this) );
+    } );
+
+
+ 
+} ); 
+</script>
+   {% endblock %}
+
+  {% block stylesheets %}
+            
+            <link href="{{ asset('src/PhenomeDrug/Bundle/ServerSide/DataTables-1.9.4/media/css/demo_table.css') }}" rel="stylesheet" />
+  {% endblock %}
+ </head>
+<table>
+<table id="table_id" class="display" >
+<thead> 
+
+
+
+   <tr><th>Drug</th> <th>Target</th> <th>Indications</th> </tr>
+</thead> 
+<tbody>
+
+ {% for result in results %}
+ 
+   <tr>
+     <td><a href="{{ path('phenome_drug_page', { 'drug_name': result.drug_name }) }}">{{ result.drug_name}}</a></td>
+     <td>{% for target in result.targets %}
+       <li><a href="{{ path('phenome_target_page', { 'target_name': target.target_name })  }}">{{target.target_name}}</a>
+ 	 {% endfor %}
+     </td>
+
+      <td>{% if result.indications is defined %} {% for indication in result.indications %}
+       <li> <a href="{{ path('phenome_indication_page', { 'indication': indication.indication_uri })  }}">{{indication.indication_uri}}</a>
+ 	 {% endfor %} {% endif %}
+     </td>
+   </tr>
+
+ {% endfor %}
+
+</tbody> 
+
+	<tfoot>
+		<tr>
+			<th><input type="text" name="search_drug" value="Search drugs" class="search_init" /></th>
+			<th><input type="text" name="search_target" value="Search targets" class="search_init" /></th>
+			<th><input type="text" name="search_indication" value="Search indications" class="search_init" /></th>
+
+		</tr>
+	</tfoot>
+
+</table>
+</html>
+
+ </body>
+</html>
+
+
