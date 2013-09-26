@@ -129,7 +129,7 @@ var asInitVals = new Array();
      </td>
 
       <td>{% if result.indications is defined %} {% for indication in result.indications %}
-       <li> <a href="{{ path('phenome_indication_page', { 'indication': indication.indication_uri })  }}">{{indication.indication_uri}}</a>
+       <li> <a href=" http://test.com/">{{indication.indication_uri}}</a>{{indication.indication_uri}}</a>
  	 {% endfor %} {% endif %}
      </td>
    </tr>
@@ -153,4 +153,6 @@ var asInitVals = new Array();
  </body>
 </html>
 
-
+{#
+ <li> <a href="{{ path('phenome_indication_page', { 'indication': indication.indication_uri })  }}">{{indication.indication_uri}}</a>
+#}

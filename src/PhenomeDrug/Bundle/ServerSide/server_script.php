@@ -136,7 +136,7 @@ public function queryEndpointSimple($query)
 		   $target_list .= "<li>";
 		   preg_match("/\[drugbank_target:(\d{2,4})\]/",(string) ($t_result->target_name->value),$m);
 		   $target_id = $m[1];
-		   $target_list .= '<a href="http://localhost/Symfony2/web/app_dev.php/try/targets/'.$target_id.'">'.(string) ($t_result->target_name->value).'</a>';
+		   $target_list .= '<a href="http://localhost/Symfony2/web/app_dev.php/PhenomeDrug/targets/'.$target_id.'">'.(string) ($t_result->target_name->value).'</a>';
 		   //$filtered = false;
 	  }
 	  $target_list .= '</ul>';
@@ -165,7 +165,7 @@ public function queryEndpointSimple($query)
 	  foreach($indication_obj->results->bindings AS $result3) {
 		   $indication_list .= "<li>";
 		   $indication = (string) ($result3->indication->value);
-		   $i = '<a href="http://localhost/Symfony2/web/app_dev.php/try/indication/'.$indication.'">'.(string) ($result3->indication->value). '</a>';
+		   $i = '<a href="http://localhost/Symfony2/web/app_dev.php/PhenomeDrug/indication/'.$indication.'">'.(string) ($result3->indication->value). '</a>';
 		   if($i != '') $filtered = false;
 		   $indication_list .= $i;
 		  }
